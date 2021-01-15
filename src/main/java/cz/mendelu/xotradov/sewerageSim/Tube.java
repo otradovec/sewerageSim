@@ -1,12 +1,18 @@
 package cz.mendelu.xotradov.sewerageSim;
 
 public class Tube {
+    private String name;
     private int maxCapacity;
     private float currentAmount;
 
-    public Tube(int maxCapacity) {
+    public Tube(String name, int maxCapacity) {
+        this.name = name;
         this.maxCapacity = maxCapacity;
         this.currentAmount = 0;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getMaxCapacity() {
@@ -24,5 +30,12 @@ public class Tube {
 
     public float getUsagePercent() {
         return currentAmount/maxCapacity*100;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Tube)
+            return this.name.equals(((Tube) obj).name);
+        else return false;
     }
 }

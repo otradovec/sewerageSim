@@ -11,7 +11,7 @@ public class TubeTest {
     Tube tube;
     @Before
     public void setUp() throws Exception {
-        tube = new Tube(MAX_CAP);
+        tube = new Tube("A",MAX_CAP);
     }
     @Test
     public void getMaxCapacity() {
@@ -37,4 +37,8 @@ public class TubeTest {
         assertEquals(10F,tube.getUsagePercent(),DELTA);
     }
 
+    @Test
+    public void getName() {
+        assertEquals("A",tube.getName());
+    }
 }
