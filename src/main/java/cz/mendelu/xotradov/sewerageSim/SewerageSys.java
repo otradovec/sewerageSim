@@ -81,7 +81,7 @@ public class SewerageSys {
         for (Pair<Tube,Tube> pair:connections){
             System.out.println(
                     "Connection: Source "+pair.getValue0().getName()+
-                    "Destination "+pair.getValue1().getName());
+                    ", Destination "+pair.getValue1().getName());
         }
     }
 

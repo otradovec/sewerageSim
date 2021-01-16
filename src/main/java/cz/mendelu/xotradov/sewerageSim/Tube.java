@@ -12,6 +12,13 @@ public class Tube {
         this.currentAmount = 0;
     }
 
+    private Tube(String name, int maxCapacity, float currentAmount, InputTube input) {
+        this.name = name;
+        this.maxCapacity = maxCapacity;
+        this.currentAmount = currentAmount;
+        this.input=input;
+    }
+
     public String getName() {
         return name;
     }
@@ -61,5 +68,9 @@ public class Tube {
 
     public float getInput() {
         return input!=null ? input.getInput() : 0;
+    }
+
+    public Tube cloneTube() {
+        return new Tube(name,maxCapacity,currentAmount,input.getClone());
     }
 }

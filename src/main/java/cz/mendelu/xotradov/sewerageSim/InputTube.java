@@ -15,4 +15,8 @@ public class   InputTube {
     public  float getInput(){
         return (float) ((random.nextGaussian()*deviation) +mean);
     }
+
+    public InputTube getClone() {
+        return new InputTube(mean,deviation);
+    }
 }

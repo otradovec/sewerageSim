@@ -10,11 +10,19 @@ public class SewerageSim {
 
     private static void runFor(int steps, SewerageSys system) {
         float output;
+        Tube worstTube = null;
         for (int i = 0;i<steps;i++){
             output = system.nextStep();
             System.out.println("Step "+ i +". Output "+ output +".");
             system.print();
+            Tube weakestTube = system.getWeakestTube();
+            if (worstTube==null) worstTube = weakestTube.cloneTube();
         }
+        printWorstCase(worstTube);
+    }
+
+    private static void printWorstCase(Tube worstTube) {
+        System.out.println("The Worst case was on tube "+worstTube.getName()+" that had usage of "+worstTube.getUsagePercent()+" %.");
     }
 
     private static void createStaticSystem(SewerageSys system) {
@@ -22,15 +30,15 @@ public class SewerageSim {
         system.add(a);
         Tube b = new Tube("B",200);
         system.add(b);
-        Tube c = new Tube("C",200);
+        Tube c = new Tube("C",300);
         system.add(c);
-        Tube d = new Tube("D",200);
+        Tube d = new Tube("D",300);
         system.add(d);
-        Tube e = new Tube("E",200);
+        Tube e = new Tube("E",400);
         system.add(e);
-        Tube f = new Tube("F",200);
+        Tube f = new Tube("F",500);
         system.add(f);
-        Tube g = new Tube("G",200);
+        Tube g = new Tube("G",800);
         system.add(g);
 
         system.connect(a,e);

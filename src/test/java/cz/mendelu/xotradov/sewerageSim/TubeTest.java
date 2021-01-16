@@ -13,6 +13,12 @@ public class TubeTest {
     public void setUp() throws Exception {
         tube = new Tube("A",MAX_CAP);
     }
+
+    @Test
+    public void testEquals() {
+        assertEquals(new Tube("A",200),new Tube("A",100));
+    }
+
     @Test
     public void getMaxCapacity() {
         assertEquals(MAX_CAP,tube.getMaxCapacity());
@@ -40,5 +46,14 @@ public class TubeTest {
     @Test
     public void getName() {
         assertEquals("A",tube.getName());
+    }
+
+    @Test
+    public void cloneTube() {
+        Tube clone = tube.cloneTube();
+        assertEquals(clone,tube);
+        assertEquals(tube.getCurrentAmount(),clone.getCurrentAmount(),DELTA);
+        clone.setCurrentAmount(20);
+        assertNotEquals(tube.getCurrentAmount(),clone.getCurrentAmount(),DELTA);
     }
 }
