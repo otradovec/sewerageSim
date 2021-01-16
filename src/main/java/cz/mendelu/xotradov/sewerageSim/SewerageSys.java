@@ -40,7 +40,7 @@ public class SewerageSys {
 
     public float nextStep() {
         Tube end = findEnd();
-        Float result = end.getCurrentAmount();
+        float result = end.getCurrentAmount();
         end.setCurrentAmount(0);
         this.populateStep(end);
         return result;
@@ -51,17 +51,18 @@ public class SewerageSys {
             if (pair.getValue1().equals(endTube)){
                 endTube.addCurrentAmount(pair.getValue0().getCurrentAmount());
                 pair.getValue0().setCurrentAmount(0);
+                pair.getValue0().setCurrentAmount(pair.getValue0().getInput());
                 populateStep(pair.getValue0());
             }
         }
     }
 
     private Tube findEnd() {
-        Tube resutl = null;
+        Tube result = null;
         for (Tube tube: tubes.values()){
-            if (isNotSource(tube)) resutl=tube;
+            if (isNotSource(tube)) result=tube;
         }
-        return resutl;
+        return result;
     }
 
     private boolean isNotSource(Tube tube) {
@@ -69,5 +70,24 @@ public class SewerageSys {
             if (pair.getValue0().equals(tube)) return false;
         }
         return true;
+    }
+
+    public void print() {
+        printTubes();
+        printConnections();
+    }
+
+    private void printConnections() {
+        for (Pair<Tube,Tube> pair:connections){
+            System.out.println(
+                    "Connection: Source "+pair.getValue0().getName()+
+                    "Destination "+pair.getValue1().getName());
+        }
+    }
+
+    private void printTubes() {
+        for (Tube tube: tubes.values()){
+            System.out.println(tube.toString());
+        }
     }
 }
