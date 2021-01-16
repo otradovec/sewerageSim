@@ -38,4 +38,8 @@ public class Tube {
             return this.name.equals(((Tube) obj).name);
         else return false;
     }
+
+    public void addCurrentAmount(float currentAmount) {
+        this.setCurrentAmount(getCurrentAmount()+currentAmount);
+    }
 }
