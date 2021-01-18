@@ -2,21 +2,16 @@ package cz.mendelu.xotradov.sewerageSim;
 
 public class SewerageSim {
 
-    public static void main(String[] args) {
-        SewerageSys system = new SewerageSys();
-        createStaticSystem(system);
-        runFor(168,system);
-    }
-
-    private static void runFor(int steps, SewerageSys system) {
+    void runFor(int steps, SewerageSys system) {
         float output;
         Tube worstTube = null;
         for (int i = 0;i<steps;i++){
             output = system.nextStep();
             System.out.println("Step "+ i +". Output "+ output +".");
-            system.print();
+            system.printTubes();
             Tube weakestTube = system.getWeakestTube();
-            if (worstTube==null) worstTube = weakestTube.cloneTube();
+            if (worstTube==null || worstTube.getUsagePercent()<weakestTube.getUsagePercent())
+                worstTube = weakestTube.cloneTube();
         }
         printWorstCase(worstTube);
     }
@@ -25,7 +20,7 @@ public class SewerageSim {
         System.out.println("The Worst case was on tube "+worstTube.getName()+" that had usage of "+worstTube.getUsagePercent()+" %.");
     }
 
-    private static void createStaticSystem(SewerageSys system) {
+    void createStaticSystem(SewerageSys system) {
         Tube a = new Tube("A",200);
         system.add(a);
         Tube b = new Tube("B",200);

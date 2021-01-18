@@ -33,7 +33,7 @@ public class Tube {
 
     public void setCurrentAmount(float currentAmount) {
         if (currentAmount>this.maxCapacity)
-            System.err.println("Pipe "+this.name+" overflow. Capacity is "+
+             throw new RuntimeException("Pipe "+this.name+" overflow. Capacity is "+
                 this.maxCapacity+" but setting "+currentAmount);
         this.currentAmount = currentAmount;
     }
@@ -71,6 +71,6 @@ public class Tube {
     }
 
     public Tube cloneTube() {
-        return new Tube(name,maxCapacity,currentAmount,input.getClone());
+        return new Tube(name,maxCapacity,currentAmount,input!=null? input.getClone():null);
     }
 }

@@ -1,7 +1,9 @@
 package cz.mendelu.xotradov.sewerageSim;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +11,7 @@ public class TubeTest {
     private static final double DELTA = 1e-15;
     private static final int MAX_CAP = 200;
     Tube tube;
+
     @Before
     public void setUp() throws Exception {
         tube = new Tube("A",MAX_CAP);
@@ -56,4 +59,13 @@ public class TubeTest {
         clone.setCurrentAmount(20);
         assertNotEquals(tube.getCurrentAmount(),clone.getCurrentAmount(),DELTA);
     }
+    @Test
+    public void cloneTubeWithInputTube(){
+        tube.setInput(new InputTube(1000,1));
+        Tube clone = tube.cloneTube();
+        assertEquals(tube,clone);
+        assertTrue(clone.getInput()>100);
+        assertTrue(clone.getInput()<10000);
+    }
+
 }

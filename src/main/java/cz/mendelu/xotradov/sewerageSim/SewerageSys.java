@@ -85,7 +85,7 @@ public class SewerageSys {
         }
     }
 
-    private void printTubes() {
+    void printTubes() {
         for (Tube tube: tubes.values()){
             System.out.println(tube.toString());
         }
