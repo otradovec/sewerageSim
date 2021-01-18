@@ -4,16 +4,16 @@ public class SewerageSim {
 
     void runFor(int steps, SewerageSys system) {
         float output;
-        Tube worstTube = null;
+        Tube worstInSimulation = null;
         for (int i = 0;i<steps;i++){
             output = system.nextStep();
             System.out.println("Step "+ i +". Output "+ output +".");
             system.printTubes();
-            Tube weakestTube = system.getWeakestTube();
-            if (worstTube==null || worstTube.getUsagePercent()<weakestTube.getUsagePercent())
-                worstTube = weakestTube.cloneTube();
+            Tube weakestInStep = system.getWeakestTube();
+            if (worstInSimulation==null || worstInSimulation.getUsagePercent()<weakestInStep.getUsagePercent())
+                worstInSimulation = weakestInStep.cloneTube();
         }
-        printWorstCase(worstTube);
+        printWorstCase(worstInSimulation);
     }
 
     private static void printWorstCase(Tube worstTube) {
